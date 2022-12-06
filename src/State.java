@@ -155,28 +155,3 @@ public class State {
         return null;
     }
 }
-class Array2D{
-    public Array2D(int[][] map) {
-        this.map = map;
-    }
-
-    public int[][] getMap() {
-        return map;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Array2D array2D = (Array2D) o;
-        return Arrays.equals(map, array2D.map);
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(map);
-    }
-
-    int[][] map;
-
-}
