@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Game_Frame extends JFrame {
@@ -12,8 +13,8 @@ public class Game_Frame extends JFrame {
     public  JPanel board = new JPanel();
 
     public Game_Frame(int row, int col) {
-        this.WIDTH = 200*row;
-        this.HEIGHT = 125*col;
+        this.WIDTH = 1200;
+        this.HEIGHT = 900;
         this.setTitle("Numeric_Klotski");
         this.setSize(WIDTH, HEIGHT);
         this.chess = new JButton[row][col];
@@ -27,7 +28,7 @@ public class Game_Frame extends JFrame {
     }
 
     public void setChessboard(int[][] array){
-       initialChessboard();
+       initiateChessboard();
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[0].length; j++) {
                 if(array[i][j] != 0) {
@@ -48,16 +49,11 @@ public class Game_Frame extends JFrame {
                     this.repaint();
                      }
                     }
-
                 }
-
             }
 
 
-
-
     public void createChessboard(int[][] array){
-
         board.setBounds(0,0,600,500);
         board.setLayout(new GridLayout(chess.length,chess[0].length,0,0));
         c.add(board);
@@ -82,16 +78,15 @@ public class Game_Frame extends JFrame {
         this.add(showStep);
     }
 
-    public void showMove(int[][] array){
+    public void showMove(ArrayList<BFSArray2D> a,int[] pivots){
+        int count = a.size();
+        AtomicInteger i= new AtomicInteger(a.size());
         this.showStep.addActionListener((e) -> {
-            setChessboard(array);
-            // Y 在里面添加我鼠标点击该按钮之后要执行的命令语句
-         setChessboard(array);
-
+          setChessboard(Input.addMinus(a.get(i.decrementAndGet()).map,pivots));
         });
     }
 
-    public void initialChessboard(){
+    public void initiateChessboard(){
         for (int i = 0; i < chess.length; i++) {
             for (int j = 0; j < chess[0].length; j++) {
                 chess[i][j].setBackground(Color.lightGray);
