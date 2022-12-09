@@ -79,9 +79,8 @@ public class Game_Frame extends JFrame {
     }
 
     public void showMove(ArrayList<BFSArray2D> a,int[] pivots){
-        int count = a.size();
-        AtomicInteger i= new AtomicInteger(a.size());
-        this.showStep.addActionListener((e) -> {
+        AtomicInteger i= new AtomicInteger(a.size()-1);
+        this.showStep.addActionListener(e -> {
           setChessboard(Input.addMinus(a.get(i.decrementAndGet()).map,pivots));
         });
     }
